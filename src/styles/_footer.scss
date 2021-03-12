@@ -12,6 +12,10 @@ footer {
   line-height: 14px;
   bottom: 0;
 
+  .footer-content {
+    @include media-breakpoint-up(sm) { text-align: center; }
+  }
+
   p {
     color: white;
     font-size: 14px;
