@@ -1,0 +1,51 @@
+
+.body, .main {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  &:hover .link-copy {
+    text-decoration: underline;
+  }
+  .link-icon {
+    padding-left: 0.2em;
+
+    &.modal-open {
+      &::before {
+        font-size: 18px;
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        content: "+";
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.viewport {
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  width: 100%;
+  background-color: pink;
+  padding-left: 40px;
+
+  &:after {
+    display: block;
+    content: "x-small";
+    @include media-breakpoint-up(sm) { content: "small"; }
+    @include media-breakpoint-up(md) { content: "medium"; }
+    @include media-breakpoint-up(lg) { content: "large"; }
+    @include media-breakpoint-up(xl) { content: "x-large"; }
+  }
+}
+
+@import "fonts";
+
+.visually-hidden {
+  visibility: hidden;
+  height: 0;
+}

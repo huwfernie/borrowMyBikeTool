@@ -1,0 +1,42 @@
+.section-hero {
+  padding-top: 50px;
+
+  .section-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .headline {
+    text-align: center;
+    margin-bottom: 0.9em;
+  }
+
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+@at-root {
+  html.js.norm .section-hero .headline span {
+    opacity: 1;
+    transition: opacity 1s;
+
+    &.hidden {
+      opacity: 0;
+      transition: opacity 0s;
+    }
+  }
+  html.js.norm .section-hero .hero-image {
+    opacity: 1;
+    transition: opacity 1s;
+
+    &.hidden {
+      opacity: 0;
+      transition: opacity 0s;
+    }
+  }
+}

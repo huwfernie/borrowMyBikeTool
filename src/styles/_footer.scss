@@ -1,0 +1,32 @@
+
+
+footer {
+  background-color: black;
+  min-height: 50px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: static;
+  line-height: 14px;
+  bottom: 0;
+
+  p {
+    color: white;
+    font-size: 14px;
+    font-weight: 200;
+    margin: 0;
+  }
+
+  a {
+    color: white;
+    font-weight: 400;
+    font-style: italic;
+
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
