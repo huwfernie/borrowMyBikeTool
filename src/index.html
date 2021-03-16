@@ -7,13 +7,19 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script>document.documentElement.classList.replace('nojs', 'js')</script>
     <script>window.matchMedia("(prefers-reduced-motion: reduce)").matches ? document.documentElement.classList.replace('norm', 'rm') : null;</script>
+    <meta name="description" content="Borrow this bike tool for free, collect from North London or post to your house, fix your bike." />
+    <meta property="og:image" content="images/og.png" />
+    <meta property="og:title" content="Borrow My Bike Tool" />
+    <meta property="og:description" content="Borrow this bike tool for free, collect from North London or post to your house, fix your bike." />
   </head>
   <body class="body">
     <script>
       const body=document.querySelector('.body');
       body.style.opacity = 0;
       window.addEventListener('load', (event) => {
-        body.style.opacity = 1;
+        body.style.removeProperty('opacity');
+        const _event = new Event('pageReady');
+        body.dispatchEvent(_event);
       });
     </script>
     <main class="main">

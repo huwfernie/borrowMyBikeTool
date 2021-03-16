@@ -1,18 +1,71 @@
 import './style.scss';
 
-// 1.
-const headlineWords = document.querySelectorAll('.section-hero .headline span.hidden');
-headlineWords.forEach((word, index) => {
-  setTimeout(() => {
-    word.classList.remove('hidden');
-  }, 500 + 300*index);
-});
+// ************
+// HERO TIMECONTROLLER
+// ************
 
-// 2.
-const heroImage = document.querySelector('.section-hero .hero-image.hidden');
-setTimeout(() => {
-  heroImage.classList.remove('hidden');
-}, 1700);
+(function( HeroTimeController, undefined ) {
+  const routine = [
+    {
+      elem: document.querySelectorAll('.section-hero .headline span.hidden')[0],
+      time: 500
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .headline span.hidden')[1],
+      time: 800
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .headline span.hidden')[2],
+      time: 1100
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .headline span.hidden')[3],
+      time: 1400
+    },
+    {
+      elem: document.querySelector('.section-hero .hero-image.hidden'),
+      time: 1700
+    }
+  ];
+
+  //Public Method
+  HeroTimeController.init = () => {
+    document.querySelector('body').addEventListener('pageReady', () => {
+      HeroTimeController.startTime = new Date().getTime();
+      window.requestAnimationFrame(step);
+    });
+  }
+
+  const body = document.querySelector('.body');
+  const _event = new Event('HeroTimeControllerComplete');
+
+  let start = undefined;
+  let index = 0;
+
+  function step(timestamp) {
+    if (start === undefined)
+    start = timestamp;
+    const elapsed = timestamp - start;
+
+    if (elapsed >= routine[index].time) {
+      routine[index].elem.classList.remove('hidden');
+      index++;
+    }
+
+    if (routine[index]) {
+      window.requestAnimationFrame(step);
+    } else {
+      body.dispatchEvent(_event);
+    }
+  }
+}( document.HeroTimeController = document.HeroTimeController || {} ));
+
+document.HeroTimeController.init();
+
+
+// ************
+// MODAL
+// ************
 
 // 3.
 const links = document.querySelectorAll('[data-overlay-link]');
@@ -33,48 +86,41 @@ closeButtons.forEach((elem) => {
   });
 });
 
-// 5.
-document.scrollController = {};
-document.scrollController.scrollTargets = [...document.querySelectorAll('[data-scroll-target]')].map((elem) => {
-  return { el: elem, start: elem.dataset.threshold, delay: parseInt(elem.dataset.delay) || 0, done: false };
-});
-const handleScroll = (e) => {
-  document.scrollController.scrollTargets.forEach((target) => {
-    if (!target.done) {
-      // console.log( `w.scrollY: ${window.scrollY} -- OST: ${target.el.offsetTop} -- innerHeight: ${window.innerHeight}`);
-      if(window.innerHeight +  window.scrollY > target.el.offsetTop + parseInt(target.start.replace('t',''))) {
-        // ignore delay in single column viewports
-        const delay = window.innerWidth < 768 ? 0 : target.delay;
-        setTimeout(()=>{
-          target.el.classList.add('active');
-        }, delay);
+// ************
+// GRID CARD BUILD IN
+// ************
 
-        target.done = true;
-      }
-    }
+(function( ScrollController, undefined ) {
+  const scrollTargets = [...document.querySelectorAll('[data-scroll-target]')].map((elem) => {
+    return { el: elem, start: elem.dataset.threshold, delay: parseInt(elem.dataset.delay) || 0, done: false };
   });
-}
-document.scrollController.handleScroll = () => {
-  document.scrollController.scrollTargets.forEach((target) => {
-    if (!target.done) {
-      // console.log( `w.scrollY: ${window.scrollY} -- OST: ${target.el.offsetTop} -- innerHeight: ${window.innerHeight}`);
-      if(window.innerHeight +  window.scrollY > target.el.offsetTop + parseInt(target.start.replace('t',''))) {
-        // ignore delay in single column viewports
-        const delay = window.innerWidth < 768 ? 0 : target.delay;
-        setTimeout(()=>{
-          target.el.classList.add('active');
-        }, delay);
 
-        target.done = true;
+  //Public Method
+  ScrollController.handleScroll = () => {
+    scrollTargets.forEach((target) => {
+      if (!target.done) {
+        if(window.innerHeight +  window.scrollY > target.el.offsetTop + parseInt(target.start.replace('t',''))) {
+          // ignore delay in single column viewports
+          const delay = window.innerWidth < 768 ? 0 : target.delay;
+          setTimeout(()=>{
+            target.el.classList.add('active');
+          }, delay);
+
+          target.done = true;
+        }
       }
-    }
-  });
-}
+    });
+  }
+}( document.ScrollController = document.ScrollController || {} ));
+
 window.addEventListener('scroll', () => {
-  document.scrollController.handleScroll();
+  document.ScrollController.handleScroll();
 });
-// Call once on page init in case any elements load on screen
-// delay waits for hero anim to finish
-setTimeout(() => {
-  document.scrollController.handleScroll();
-}, 1700);
+// Call after hero build in complete in case any card elements load on screen
+document.querySelector('body').addEventListener('HeroTimeControllerComplete', () => {
+  document.ScrollController.handleScroll();
+});
+
+// ************
+// END
+// ************
