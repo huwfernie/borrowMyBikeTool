@@ -47,5 +47,9 @@ a {
 
 .visually-hidden {
   visibility: hidden;
-  height: 0;
+  height: 0px;
+}
+
+.nowrap {
+  white-space: nowrap;
 }

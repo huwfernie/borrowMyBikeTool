@@ -18,6 +18,17 @@
     align-items: center;
     margin: 0 auto;
   }
+
+  .copy-wrapper {
+    margin-top: 50px;
+    text-align: center;
+    margin: 0 auto;
+    @include media-breakpoint-up(lg) { max-width: 680px }
+
+    .copy {
+      margin-top: 1.6em;
+    }
+  }
 }
 
 @at-root {
@@ -33,6 +44,15 @@
   html.js.norm .section-hero .hero-image {
     opacity: 1;
     transition: opacity 1s;
+
+    &.hidden {
+      opacity: 0;
+      transition: opacity 0s;
+    }
+  }
+  html.js.norm .section-hero .copy {
+    opacity: 1;
+    transition: opacity 1.4s;
 
     &.hidden {
       opacity: 0;

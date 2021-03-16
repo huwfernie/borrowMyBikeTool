@@ -25,6 +25,18 @@ import './style.scss';
     {
       elem: document.querySelector('.section-hero .hero-image.hidden'),
       time: 1700
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .copy.hidden')[0],
+      time: 1800
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .copy.hidden')[1],
+      time: 1900
+    },
+    {
+      elem: document.querySelectorAll('.section-hero .copy.hidden')[2],
+      time: 2000
     }
   ];
 
