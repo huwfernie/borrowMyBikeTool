@@ -2,6 +2,9 @@
 
 .section-more {
   padding-top: 50px;
+  @include media-breakpoint-up(lg) {
+    padding-top: 75px;
+  }
 
   .section-content {
     overflow: hidden;
