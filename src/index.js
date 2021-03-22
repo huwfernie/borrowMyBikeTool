@@ -1,4 +1,6 @@
 import './style.scss';
+// needed for file loader
+import ogImg from './images/og.png';
 
 // ************
 // HERO TIMECONTROLLER

@@ -51,6 +51,34 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: 'html-loader',
+        options: {
+           sources: {
+             list: [
+              // All default supported tags and attributes
+              '...',
+            ],
+            urlFilter: (attribute, value, resourcePath) => {
+              // The `attribute` argument contains a name of the HTML attribute.
+              // The `value` argument contains a value of the HTML attribute.
+              // The `resourcePath` argument contains a path to the loaded HTML file.
+              if (/og\.png$/.test(value)) {
+                return false;
+              }
+              return true;
+            },
+          },
+        },
+      },
+      {
+        test: /og\.png$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'og.png',
+            },
+          },
+        ],
       },
     ],
   },
