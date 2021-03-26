@@ -82,11 +82,12 @@ document.HeroTimeController.init();
 // ************
 
 // 3.
-const links = document.querySelectorAll('[data-overlay-link]');
-links.forEach((link) => {
+const modalOpenLinks = document.querySelectorAll('[data-overlay-link]');
+modalOpenLinks.forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelector(`[data-overlay-name="${link.dataset.overlayLink}"]`).classList.remove('hidden');
+    document.querySelector('body').classList.add('modal-open');
   });
 });
 
@@ -97,6 +98,19 @@ closeButtons.forEach((elem) => {
     document.querySelectorAll('overlay.overlay').forEach((elem) => {
       elem.classList.add('hidden');
     });
+    document.querySelector('body').classList.remove('modal-open');
+  });
+});
+
+// 5.
+const modalSwitchLinks = document.querySelectorAll('[data-overlay-switch]');
+modalSwitchLinks.forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('overlay.overlay').forEach((elem) => {
+      elem.classList.add('hidden');
+    });
+    document.querySelector(`[data-overlay-name="${link.dataset.overlaySwitch}"]`).classList.remove('hidden');
   });
 });
 
