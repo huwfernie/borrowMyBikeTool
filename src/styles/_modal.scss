@@ -8,7 +8,10 @@
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,0.8);
-  padding: 50px;
+  padding: 40px 10px;
+  @include media-breakpoint-up(sm) {
+    padding: 50px;
+  }
   min-height: 100vh;
   overflow-y: auto;
 
@@ -18,11 +21,28 @@
 
   &-content {
     background-color: white;
-    padding: 45px 35px 35px;
+    padding: 45px 10px 35px;
+    @include media-breakpoint-up(sm) {
+      padding: 45px 35px 35px;
+    }
     border-radius: 14px;
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
+
+    ol {
+      padding-left: 1.5rem;
+      @include media-breakpoint-up(sm) {
+        padding-left: 2rem;
+      }
+    }
+
+    ul {
+      padding-left: 1rem;
+      @include media-breakpoint-up(sm) {
+        padding-left: 2rem;
+      }
+    }
 
     li {
       margin-bottom: 0.3em;
@@ -38,7 +58,10 @@
     top: 15px;
     display: flex;
     justify-content: flex-end;
-    width: calc(100% - 70px);
+    width: calc(100% - 25px);
+    @include media-breakpoint-up(sm) {
+      width: calc(100% - 70px);
+    }
 
     &-button {
       border-radius: 50%;
