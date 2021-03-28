@@ -9,6 +9,20 @@
   .section-content {
     overflow: hidden;
   }
+
+  .tile-link {
+    &:hover {
+      cursor: pointer;
+
+      .link {
+        color: #0a58ca;
+      }
+
+      .link-copy {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 @import "more/grid";
